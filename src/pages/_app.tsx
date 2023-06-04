@@ -3,15 +3,16 @@ import {
   theme,
   ColorModeProvider,
   CSSReset,
+  ChakraProvider,
 } from "@chakra-ui/react";
 import "../styles/globals.css"
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-import firebase from "firebase/app";
+import firebase, {initializeApp} from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-export const app = firebase.initializeApp(
+export const appF = initializeApp(
     {
         apiKey: "AIzaSyBQQl0RKi_a0T7ePH4Zfh74KZZJvwbOmNE",
         authDomain: "grandacademy-8ff89.firebaseapp.com",
@@ -24,16 +25,21 @@ export const app = firebase.initializeApp(
 
 const auth = getAuth()
 
-const db = getFirestore(app);
+const db = getFirestore(appF);
 
 export const Context = createContext<any>(null)
 
 function App({ Component, pageProps }: any): JSX.Element {
 
+    useEffect(() => {
+        localStorage.setItem("chakra-ui-color-mode", "dark")
+    }, [])
+
     return (
         <Context.Provider value={{firebase, auth, db}}>
-            <CSSReset />
-            <Component {...pageProps} />
+            <ChakraProvider>
+                <Component {...pageProps} />
+            </ChakraProvider>
         </Context.Provider>
     )
 }

@@ -45,7 +45,7 @@ const Navbar = () => {
 
             <Box color={'black'} display={{base: 'none' , lg: 'block'}} py={2} px={10} style={{borderRadius: "10px"}}>
                 <Link href={'/login'} >
-                    <Button bg={'white'} colorScheme='gray'>Ro'yhatdan o'tish</Button>
+                    <Button bg={'white'} color={"black"} colorScheme='gray'>Ro'yhatdan o'tish</Button>
                 </Link>
             </Box>
 
